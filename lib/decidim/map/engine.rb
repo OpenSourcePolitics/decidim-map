@@ -4,6 +4,9 @@ require "rails"
 require "active_support/all"
 require "decidim/core"
 
+require "decidim/map/api/query_extensions"
+require "decidim/map/api/proposal_extensions"
+
 module Decidim
   module Map
     # This is the engine that runs on the public interface of map.
@@ -19,6 +22,15 @@ module Decidim
       initializer "decidim_map.mount_routes" do |_app|
         Decidim::Core::Engine.routes do
           mount Decidim::Map::Engine => "/map"
+        end
+      end
+
+      initializer "decidim_map.query_extensions" do
+        Decidim::Api::QueryType.define do
+          Api::QueryExtensions.define(self)
+        end
+        Decidim::Proposals::ProposalType.define do
+          Api::ProposalExtensions.define(self)
         end
       end
 

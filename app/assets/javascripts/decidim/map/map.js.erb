@@ -1,0 +1,16 @@
+// = require_self
+// = require ./bundle
+
+console.log('app/assets/javascripts/decidim/map/map.js.erb START');
+window.DecidimMap = window.DecidimMap || {};
+
+window.DecidimMap = {
+  assets: {
+    'icons.svg': '<%= asset_path "decidim/icons.svg" %>',
+    'proposal': '<%= asset_path "decidim/proposals/icon.svg" %>',
+    'budget': '<%= asset_path "decidim/budgets/icon.svg" %>',
+    'meeting': '<%= asset_path "decidim/meetings/icon.svg" %>'
+  }
+};
+console.dir(window.DecidimMap);
+console.log('app/assets/javascripts/decidim/map/map.js.erb END');

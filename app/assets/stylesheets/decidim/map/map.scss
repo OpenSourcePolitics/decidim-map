@@ -1,0 +1,67 @@
+
+$gray-base:              #000;
+$gray-darker:            lighten($gray-base, 13.5%);
+$gray-dark:              #303030;
+$gray:                   #464545;
+$gray-light:             #999;
+$gray-lighter:           #ebebeb;
+$brand-red:             #ef604d; // transparentize(#ff4500, .3);
+$brand-blue:            transparentize(#00bfff, .2);
+
+$font-size-base: 16px;
+
+$padding-base-vertical:     6px;
+$padding-base-horizontal:   12px;
+
+$padding-large-vertical:    10px;
+$padding-large-horizontal:  16px;
+
+$padding-small-vertical:    5px;
+$padding-small-horizontal:  10px;
+
+$padding-xs-vertical:       1px;
+$padding-xs-horizontal:     5px;
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:        1.428571429; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed:    floor(($font-size-base * $line-height-base)); // ~20px
+
+$sidebar-margins: 0;
+$sidebar-tab-size: 42px;
+$sidebar-border-radius: 0;
+$sidebar-touch-border: none;
+$sidebar-shadow: none;
+$sidebar-transition: 400ms;
+$sidebar-width-lg: 600px; // $modal-md
+$sidebar-width-md: 420px;
+$sidebar-width-sm: 300px; // $modal-sm
+
+@import 'leaflet';
+@import 'controls';
+@import 'sidebar';
+
+// Strech map inside the main application layout
+.footer-separator{
+  display: flex;
+  flex-direction: column;
+
+  main{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    .section-stretch{
+      flex: 1;
+      display: flex;
+
+      .decidim-map{
+        flex: 1;
+        display: flex;
+
+        .leaflet-container{
+          flex: 1;
+        }
+      }
+    }
+  }
+}

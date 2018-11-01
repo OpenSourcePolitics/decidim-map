@@ -1,0 +1,351 @@
+$sidebar-margins: 10px !default;
+$sidebar-border-radius: 4px !default;
+$sidebar-touch-border: 2px solid rgba(0, 0, 0, .2) !default;
+$sidebar-shadow: 0 1px 5px rgba(0, 0, 0, .65) !default;
+$sidebar-tab-fg: $gray-darker !default;
+$sidebar-tabs-bg: transparent !default;
+$sidebar-tab-hover-fg: $brand-red !default;
+$sidebar-tab-hover-bg: transparent !default;
+$sidebar-tab-active-fg: $brand-red !default;
+$sidebar-tab-active-bg: transparent !default;
+$sidebar-threshold-lg: $sidebar-width-lg !default;
+$sidebar-threshold-md: $sidebar-width-md !default;
+$sidebar-threshold-sm: $sidebar-width-sm !default;
+$sidebar-width-xs: 100% !default;
+$sidebar-z-index: 700 !default;
+$sidebar-transition: 500ms !default;
+$sidebar-tab-font-size: $font-size-base !default;
+$sidebar-tab-bg: transparent !default;
+$sidebar-tab-transition: 80ms !default;
+$sidebar-header-fg: $gray-darker !default;
+$sidebar-header-bg: white !default;
+$sidebar-header-margin-bottom: $padding-small-horizontal !default;
+$sidebar-content-bg: transparentize(white, .05) !default;
+$sidebar-content-padding-vertical: $padding-base-vertical !default;
+$sidebar-content-padding-horizontal: $padding-base-horizontal !default;
+
+.sidebar{
+  position: absolute;
+  top: 120px;
+  bottom: 140px;
+  width: $sidebar-width-xs;
+  overflow: hidden;
+  z-index: $sidebar-z-index;
+  box-shadow: $sidebar-shadow;
+
+  &.leaflet-touch{
+    box-shadow: none;
+    border-right: $sidebar-touch-border;
+  }
+
+  &.collapsed{
+    width: $sidebar-tab-size;
+  }
+
+  @media(min-width: $sidebar-threshold-sm){
+    top: 120px;
+    bottom: 140px;
+    transition: width $sidebar-transition;
+    border-radius: $sidebar-border-radius;
+
+    &.leaflet-touch{
+      border: $sidebar-touch-border;
+    }
+  }
+
+  @media(min-width: $sidebar-threshold-sm) and (max-width: $sidebar-threshold-md - 1px){
+    width: $sidebar-width-sm;
+    max-width: $sidebar-width-sm;
+  }
+
+  @media(min-width: $sidebar-threshold-md) and (max-width: $sidebar-threshold-lg - 1px){
+    width: $sidebar-width-md;
+    max-width: $sidebar-width-md;
+  }
+
+  @media(min-width: $sidebar-threshold-lg){
+    width: $sidebar-width-lg;
+    max-width: $sidebar-width-lg;
+  }
+}
+
+.sidebar-left{
+  left: 0;
+
+  @media(min-width: $sidebar-threshold-sm){
+    left: $sidebar-margins;
+  }
+
+  & ~ .leaflet-container .leaflet-control-container .leaflet-left{
+    @media(min-width: $sidebar-threshold-sm){
+      transition: left $sidebar-transition;
+    }
+
+    @media(min-width: $sidebar-threshold-sm) and (max-width: $sidebar-threshold-md - 1px){
+      left: $sidebar-width-sm + $sidebar-margins;
+    }
+
+    @media(min-width: $sidebar-threshold-md) and (max-width: $sidebar-threshold-lg - 1px){
+      left: $sidebar-width-md + $sidebar-margins;
+    }
+
+    @media(min-width: $sidebar-threshold-lg){
+      left: $sidebar-width-lg + $sidebar-margins;
+    }
+  }
+
+  &.collapsed ~ .leaflet-container .leaflet-control-container .leaflet-left{
+    @media(min-width: $sidebar-threshold-sm){
+      left: $sidebar-tab-size + $sidebar-margins;
+    }
+  }
+}
+
+.sidebar-right{
+  right: 0;
+
+  @media(min-width: $sidebar-threshold-sm){
+    right: $sidebar-margins;
+  }
+
+  & ~ .leaflet-container .leaflet-control-container .leaflet-right{
+    @media(min-width: $sidebar-threshold-sm){
+      transition: right $sidebar-transition;
+    }
+
+    @media(min-width: $sidebar-threshold-sm) and (max-width: $sidebar-threshold-md - 1px){
+      right: $sidebar-width-sm + $sidebar-margins;
+    }
+
+    @media(min-width: $sidebar-threshold-md) and (max-width: $sidebar-threshold-lg - 1px){
+      right: $sidebar-width-md + $sidebar-margins;
+    }
+
+    @media(min-width: $sidebar-threshold-lg){
+      right: $sidebar-width-lg + $sidebar-margins;
+    }
+  }
+
+  &.collapsed ~ .leaflet-container .leaflet-control-container .leaflet-right{
+    @media(min-width: $sidebar-threshold-sm){
+      right: $sidebar-tab-size + $sidebar-margins;
+    }
+  }
+}
+
+.sidebar-tabs{
+  top: 0;
+  bottom: 0;
+  height: 100%;
+
+  .sidebar-left &{
+    left: 0;
+  }
+
+  .sidebar-right &{
+    right: 0;
+  }
+
+  background-color: $sidebar-tabs-bg;
+
+  &,
+  & > ul{
+    position: absolute;
+    width: $sidebar-tab-size;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    & > li{
+      width: 100%;
+      height: $sidebar-tab-size;
+      color: $sidebar-tab-fg;
+
+      @if $sidebar-tab-bg{
+        background: $sidebar-tab-bg;
+      }
+
+      font-size: $sidebar-tab-font-size;
+      overflow: hidden;
+      transition: all $sidebar-tab-transition;
+
+      &:hover{
+        color: $sidebar-tab-hover-fg;
+        background-color: $sidebar-tab-hover-bg;
+      }
+
+      &.active{
+        color: $sidebar-tab-active-fg;
+        background-color: $sidebar-tab-active-bg;
+      }
+
+      &.disabled{
+        color: fade-out($sidebar-tab-fg, .6);
+
+        &:hover{
+          /* stylelint-disable at-rule-empty-line-before, block-closing-brace-newline-after */
+          @if $sidebar-tab-bg{
+            background: $sidebar-tab-bg;
+          } @else{
+            background: transparent;
+          }
+          /* stylelint-enable */
+        }
+
+        & > a{
+          cursor: default;
+        }
+      }
+
+      & > a{
+        display: block;
+        width: 100%;
+        height: 100%;
+        line-height: $sidebar-tab-size;
+        color: inherit;
+        text-decoration: none;
+        text-align: center;
+
+        .fa{
+          margin-left: -2px;
+        }
+      }
+    }
+  }
+
+  & > ul + ul{
+    bottom: 0;
+  }
+}
+
+.sidebar-content{
+  position: absolute;
+
+  .sidebar-left &{
+    left: $sidebar-tab-size + $padding-xs-horizontal;
+    right: 0;
+  }
+
+  .sidebar-right &{
+    left: 0;
+    right: $sidebar-tab-size + $padding-xs-horizontal;
+  }
+
+  top: $padding-large-vertical;
+  bottom: $padding-large-vertical;
+  background-color: $sidebar-content-bg;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px 1px rgba(60, 64, 67, .149);
+  border: 1px solid #e8e8e8;
+
+  .sidebar.collapsed > &{
+    overflow-y: hidden;
+  }
+
+  .media-left,
+  .media-right{
+    .img-responsive{
+      max-width: 150px;
+    }
+  }
+
+  .media{
+    position: relative;
+    background-color: rgba(255, 255, 255, .95);
+    padding: $padding-base-vertical ($padding-base-horizontal - $padding-small-vertical);
+    margin: 0 (-$padding-base-horizontal) $padding-small-vertical;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+
+    &:hover{
+      border-color: $sidebar-tab-hover-bg;
+    }
+
+    .media-body{
+      position: relative;
+      padding-left: 5px;
+      padding-bottom: $line-height-computed + $padding-small-vertical;
+
+      .h1,
+      .h2,
+      .h3,
+      h1,
+      h2,
+      h3,
+      h3.alt{
+        margin-top: 0;
+      }
+
+      .media-row{
+        margin: $padding-small-vertical auto;
+      }
+    }
+
+    .social{
+      position: absolute;
+      bottom: 0;
+      right: $padding-base-horizontal;
+
+      a:hover{
+        color: $sidebar-tab-active-bg;
+      }
+    }
+  }
+}
+
+.sidebar-pane{
+  display: none;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: $sidebar-content-padding-vertical $sidebar-content-padding-horizontal;
+
+  &.active{
+    display: block;
+  }
+
+  @media(min-width: $sidebar-threshold-sm) and (max-width: $sidebar-threshold-md - 1px){
+    min-width: $sidebar-width-sm - $sidebar-tab-size;
+  }
+
+  @media(min-width: $sidebar-threshold-md) and (max-width: $sidebar-threshold-lg - 1px){
+    min-width: $sidebar-width-md - $sidebar-tab-size;
+  }
+
+  @media(min-width: $sidebar-threshold-lg){
+    min-width: $sidebar-width-lg - $sidebar-tab-size;
+  }
+}
+
+.sidebar-header{
+  margin: (-$sidebar-content-padding-vertical) (-$sidebar-content-padding-horizontal) $sidebar-header-margin-bottom;
+  height: $sidebar-tab-size;
+  padding: 0 $sidebar-content-padding-horizontal;
+  line-height: $sidebar-tab-size;
+  font-size: $sidebar-tab-font-size * 1.2;
+  color: $sidebar-header-fg;
+  background-color: $sidebar-header-bg;
+
+  .sidebar-right &{
+    padding-left: $sidebar-tab-size;
+  }
+}
+
+.sidebar-close{
+  position: absolute;
+  top: 0;
+  width: $sidebar-tab-size;
+  height: $sidebar-tab-size;
+  text-align: center;
+  cursor: pointer;
+
+  .sidebar-left &{
+    right: 0;
+  }
+
+  .sidebar-right &{
+    left: 0;
+  }
+}

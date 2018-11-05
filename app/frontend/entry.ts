@@ -1,13 +1,12 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+// console.log('app/frontend/entry.ts START');
+
 import DecidimMapComponent, { DecidimMapApplicationProps } from "./map/decidim-map.component";
 import loadTranslations from "./support/load_translations";
 
-console.log('app/frontend/entry.ts START');
-console.dir(window.DecidimMap);
-
-// window.DecidimMap = window.DecidimMap || {};
+window.DecidimMap = window.DecidimMap || {};
 
 window.DecidimMap.renderMapComponent = (nodeId: string, props: DecidimMapApplicationProps) => {
   const node = window.$(`#${nodeId}`)[0];
@@ -20,4 +19,5 @@ window.DecidimMap.renderMapComponent = (nodeId: string, props: DecidimMapApplica
 
 // Load component locales from yaml files
 loadTranslations();
-console.log('app/frontend/entry.ts END');
+
+// console.log('app/frontend/entry.ts END');

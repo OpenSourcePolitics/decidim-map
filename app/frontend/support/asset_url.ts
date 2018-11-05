@@ -1,5 +1,4 @@
 const assetUrl = (name: string): string => {
-  console.dir(window)
   const url = window.DecidimMap.assets[name];
 
   if (!url) {

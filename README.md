@@ -1,13 +1,14 @@
 # Decidim::Map
 
-#Carto.
+React / Leaflet / GraphQL components for map display
 
 ## Usage
 
-Map will be available as a Component for a Participatory
-Space.
+Map will be available as a menu in the main navigation.
 
 ## Installation
+
+**need Decidim 0.15+**  
 
 Add this line to your application's Gemfile:
 

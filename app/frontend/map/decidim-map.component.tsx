@@ -1,17 +1,20 @@
 import * as React from "react";
 import { graphql } from "react-apollo";
 
-import { Map, TileLayer, ZoomControl } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer, ZoomControl } from 'react-leaflet';
 import { Sidebar, Tab } from 'react-leaflet-sidetabs'
+import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { FiHome, FiChevronRight, FiSearch, FiSettings } from "react-icons/fi";
 import { FaCog } from "react-icons/fa";
 
 import Application from "../application/application.component";
 import { Icon, FaIcon, ComponentIcon, ButtonIcon } from "../application/icon.component";
 
+import { GetMapQuery } from "../support/schema";
+
 const { I18n } = require("react-i18nify");
 
-interface DecidimMapProps {
+interface DecidimMapProps extends GetMapQuery {
   loading?: boolean;
 }
 
@@ -27,12 +30,14 @@ interface DecidimMapState {
  * @class
  * @augments Component
  */
-export class DecidimMapComponent extends React.Component<DecidimMapProps,DecidimMapState> {
+export class DecidimMapComponent extends React.Component<DecidimMapProps, DecidimMapState> {
 
-  constructor(props: any) {
+  constructor(props: DecidimMapProps) {
+    console.log("DecidimMapComponent -- constructor");
+    console.dir(props);
     super(props);
     this.state = {
-      collapsed: false,
+      collapsed: true,
       selected: 'settings',
     };
   }
@@ -48,12 +53,27 @@ export class DecidimMapComponent extends React.Component<DecidimMapProps,Decidim
     })
   }
 
+  public componentDidCatch(error: any, info: any) {
+    // You can also log the error to an error reporting service
+    console.error(error);
+  }
+
   public render() {
+    console.log("DecidimMapComponent -- render");
+    console.dir(this.state);
+    console.dir(this.props);
+
+    if (this.props.loading) return "Loading...";
 
     let mapClasses = "decidim-map";
     // if (loading) {
     //   mapClasses += " loading-map";
     // }
+
+    const data = this.props['map'] || {
+      proposals: [],
+      meetings: []
+    }
 
     return (
       <div className={mapClasses} id="decidim-map">
@@ -76,12 +96,27 @@ export class DecidimMapComponent extends React.Component<DecidimMapProps,Decidim
             </p>
           </Tab>
         </Sidebar>
-        <Map className="mapStyle" center={[48.8598254, 2.3132487]} zoom={12} zoomControl={false}>
+        <Map className="mapStyle"
+          center={[48.8598254, 2.3132487]}
+          zoom={12}
+          zoomControl={false}
+          maxZoom={20}>
           <TileLayer
             attribution="Carto/OSM - CC BY 3.0."
             url={'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'}
           />
           <ZoomControl position="topright" />
+          {data.proposals && (
+            <MarkerClusterGroup>
+              { data.proposals.map((proposal) => proposal && (
+                <Marker
+                  key={'marker-' + proposal.id}
+                  position={[proposal.coordinates!.latitude, proposal.coordinates!.longitude]}>
+                  <Popup>{proposal.title}</Popup>
+                </Marker>
+              ))}
+            </MarkerClusterGroup>
+          )}
         </Map>
       </div>
     );
@@ -96,6 +131,20 @@ export class DecidimMapComponent extends React.Component<DecidimMapProps,Decidim
 
 window.DecidimMapComponent = DecidimMapComponent;
 
+export const mapQuery = require("../queries/map.query.graphql");
+
+const DecidimMapComponentWithData: any = graphql<GetMapQuery, DecidimMapProps>(mapQuery, {
+  options: {
+    pollInterval: 15000
+  },
+  props: ({ ownProps, data }) => {
+    console.log("DecidimMapComponentWithData -- props");
+    console.dir(ownProps);
+    console.dir(data);
+    return {...data};
+  }
+})(DecidimMapComponent);
+
 export interface DecidimMapApplicationProps {
   locale: string;
 }
@@ -107,7 +156,7 @@ export interface DecidimMapApplicationProps {
  */
 const DecidimMapApplication: React.SFC<DecidimMapApplicationProps> = ({ locale }) => (
   <Application locale={locale}>
-    <DecidimMapComponent />
+    <DecidimMapComponentWithData />
   </Application>
 );
 

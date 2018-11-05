@@ -10,6 +10,7 @@ module Decidim
         description "Lists proposals."
         resolve ->(_obj, _args, _ctx) {
 
+          Rails.logger.debug "Decidim::Map::MapType#proposals"
           Rails.logger.debug _obj.inspect
 
           source_components_ids = Decidim::Component.where(

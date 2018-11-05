@@ -36,7 +36,9 @@ $sidebar-width-lg: 600px; // $modal-md
 $sidebar-width-md: 420px;
 $sidebar-width-sm: 300px; // $modal-sm
 
-@import 'leaflet';
+@import '../../vendor/leaflet';
+@import '../../vendor/markercluster';
+@import '../../vendor/markercluster.default';
 @import 'controls';
 @import 'sidebar';
 

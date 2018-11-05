@@ -1,0 +1,22 @@
+query GetMap{
+  map {
+    proposals {
+      id
+      title
+      coordinates {
+        latitude
+        longitude
+      }
+    }
+    meetings {
+      id
+      title {
+        translation(locale: "fr")
+      }
+      coordinates {
+        latitude
+        longitude
+      }
+    }
+  }
+}

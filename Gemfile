@@ -10,6 +10,8 @@ gem "decidim-map", path: "."
 gem "puma", "~> 3.0"
 gem "uglifier", "~> 4.1"
 
+gem "loofah", ">= 2.2.3"
+
 group :development, :test do
   gem "byebug", "~> 10.0", platform: :mri
   gem "decidim-dev", git: "https://github.com/decidim/decidim"

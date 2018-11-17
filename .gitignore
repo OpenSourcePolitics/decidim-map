@@ -21,3 +21,4 @@ schema.json
 .rspec-failures
 yarn-error.log
 .rbenv-vars
+passenger*.lock

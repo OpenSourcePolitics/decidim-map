@@ -13,7 +13,7 @@ Map will be available as a menu in the main navigation.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'decidim-map
+gem 'decidim-map'
 ```
 
 And then execute:

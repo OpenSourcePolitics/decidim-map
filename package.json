@@ -1,7 +1,7 @@
 {
   "name": "decidim-map",
   "description": "#Carto",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "repository": {
     "url": "git@github.com:OpenSourcePolitics/decidim-map.git",
     "type": "git"

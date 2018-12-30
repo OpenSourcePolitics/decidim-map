@@ -4,7 +4,8 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-gem "decidim", git: "https://github.com/decidim/decidim"
+# gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.16-stable"
+gem "decidim", path: "../decidim"
 gem "decidim-map", path: "."
 
 gem "puma", "~> 3.0"
@@ -14,7 +15,8 @@ gem "loofah", ">= 2.2.3"
 
 group :development, :test do
   gem "byebug", "~> 10.0", platform: :mri
-  gem "decidim-dev", git: "https://github.com/decidim/decidim"
+  # gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.16-stable"
+  gem "decidim-dev", path: "../decidim"
 end
 
 group :development do

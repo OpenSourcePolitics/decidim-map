@@ -31,7 +31,7 @@ module.exports = env => {
           loaders: ["babel-loader", "eslint-loader"],
         },
         {
-          test: /\.tsx?$/,
+          test: /\.ts(x)?$/,
           loaders: ["babel-loader", "ts-loader"],
         },
         {

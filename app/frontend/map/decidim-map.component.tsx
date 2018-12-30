@@ -1,5 +1,7 @@
 import * as React from "react";
+import * as ReactDOMServer from "react-dom/server";
 import { graphql } from "react-apollo";
+import assetUrl from "../support/asset_url";
 
 import { Map, Marker, Popup, TileLayer, ZoomControl } from 'react-leaflet';
 import { Sidebar, Tab } from 'react-leaflet-sidetabs'
@@ -8,7 +10,8 @@ import { FiHome, FiChevronRight, FiSearch, FiSettings } from "react-icons/fi";
 import { FaCog } from "react-icons/fa";
 
 import Application from "../application/application.component";
-import { Icon, FaIcon, ComponentIcon, ButtonIcon } from "../application/icon.component";
+import { Icon, FaIcon, ComponentIcon, ButtonIcon, MarkerIcon } from "../application/icon.component";
+import { DivIcon as LeafletDivIcon } from 'leaflet'
 
 import { GetMapQuery } from "../support/schema";
 
@@ -111,8 +114,39 @@ export class DecidimMapComponent extends React.Component<DecidimMapProps, Decidi
               { data.proposals.map((proposal) => proposal && (
                 <Marker
                   key={'marker-' + proposal.id}
-                  position={[proposal.coordinates!.latitude, proposal.coordinates!.longitude]}>
-                  <Popup>{proposal.title}</Popup>
+                  position={[proposal.coordinates!.latitude, proposal.coordinates!.longitude]}
+                  icon={new LeafletDivIcon({
+                    className: 'marker-icon',
+                    html: ReactDOMServer.renderToString(<MarkerIcon name="align-left" />),
+                    iconSize: [40, 32],
+                    iconAnchor: [20, 32],
+                    popupAnchor: [0, -16],
+                    shadowUrl: assetUrl('marker-shadow.png'),
+                    shadowRetinaUrl: assetUrl('marker-shadow.png'),
+                    shadowSize:   [40, 64],
+                    shadowAnchor: [20, 32],
+                  })} >
+                  <Popup>
+                    <div className="map-info__content">
+                      <h3>{proposal.title}</h3>
+                      <div className="bodyContent">
+                        <p>{proposal.body}</p>
+                        <div className="map__date-adress">
+                          <div className="address card__extra">
+                            <div className="address__icon"><FaIcon name="marker-alt"/></div>
+                            <div className="address__details">
+                              <span>{proposal.address}</span><br />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="map-info__button">
+                          <a href="#" className="button button--sc">
+                            {I18n.t("decidim.proposals.proposals.index.view_proposal")}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </Popup>
                 </Marker>
               ))}
             </MarkerClusterGroup>

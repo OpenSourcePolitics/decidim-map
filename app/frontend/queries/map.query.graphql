@@ -3,6 +3,8 @@ query GetMap{
     proposals {
       id
       title
+      address
+      body
       coordinates {
         latitude
         longitude

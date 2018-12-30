@@ -21,9 +21,9 @@
     "test": "jest",
     "test:watch": "npm run test -- --watch",
     "test:ci": "npm run lint && npm run test",
-    "graphql:download_schema": "apollo-codegen download-schema http://${DECIDIM_HOST:-localhost:3000}/api --output schema.json",
+    "graphql:download_schema": "apollo service:download --endpoint=http://${DECIDIM_HOST:-localhost:3000}/api",
     "pregraphql:generate_schema_types": "npm run graphql:download_schema",
-    "graphql:generate_schema_types": "apollo-codegen generate ./**/*.graphql --schema schema.json --target typescript --output app/frontend/support/schema.ts"
+    "graphql:generate_schema_types": "apollo client:codegen --queries=./**/*.graphql --localSchemaFile=schema.json --target=typescript --globalTypesFile=app/frontend/support/schema.ts"
   },
   "stylelint": {
     "rules": {
@@ -244,6 +244,7 @@
     "yaml-loader": "^0.5.0"
   },
   "dependencies": {
+    "@babel/generator": "^7.1.6",
     "@babel/types": "^7.1.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.6",
     "@fortawesome/free-regular-svg-icons": "^5.4.1",

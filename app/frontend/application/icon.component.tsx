@@ -2,9 +2,9 @@ import * as React from "react";
 import assetUrl from "../support/asset_url";
 import { library, IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faTimes, faMapMarker, faMapMarkerAlt, faCog } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faTimes, faMapMarker, faMapMarkerAlt, faCog, faAlignLeft } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faCircle, faTimes, faMapMarker, faMapMarkerAlt, faCog)
+library.add(faCircle, faTimes, faMapMarker, faMapMarkerAlt, faCog, faAlignLeft)
 
 interface IconProps {
   name: string;
@@ -50,6 +50,15 @@ export const ButtonIcon: React.SFC<FaIconProps> = ({ name, iconExtraClassName, t
     <span className={`button-icon fa-stack ${iconExtraClassName}`}>
       <FontAwesomeIcon icon="circle" className="fa-stack-2x shadow" inverse />
       <FontAwesomeIcon icon={name} className="fa-stack-1x" />
+    </span>
+  );
+};
+
+export const MarkerIcon: React.SFC<FaIconProps> = ({ name, iconExtraClassName, transform }) => {
+  return (
+    <span className={`marker-icon fa-stack ${iconExtraClassName}`}>
+      <FontAwesomeIcon icon="map-marker" className="fa-stack-2x shadow" inverse />
+      <FontAwesomeIcon icon={name} className="fa-stack-1x" transform="shrink-2 up-2" />
     </span>
   );
 };

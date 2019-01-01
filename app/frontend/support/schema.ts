@@ -9,6 +9,8 @@ export interface GetMapQuery {
       id: string,
       // This proposal's title
       title: string,
+      address: string,
+      body: string,
       // Physical coordinates for this meeting
       coordinates:  {
         // Latitude of this coordinate

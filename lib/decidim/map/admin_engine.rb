@@ -19,6 +19,13 @@ module Decidim
         # root to: "map#index"
       end
 
+      initializer "decidim_admin.assets" do |app|
+        app.config.assets.precompile += %w(
+          admin/decidim_map_manifest.js
+          admin/decidim_map_manifest.css
+        )
+      end
+
       def load_seed
         nil
       end

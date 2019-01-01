@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
 
+
+  s.add_dependency "jquery-rails", "~> 4.3"
   s.add_dependency "geocoder", "~> 1.5"
 
   s.add_dependency "decidim-admin", Decidim::Map.version

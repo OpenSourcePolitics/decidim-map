@@ -13,7 +13,8 @@ module.exports = env => {
 
   const config = {
     entry: {
-      map: "./app/frontend/entry.ts",
+      code: "./app/frontend/code.ts",
+      map: "./app/frontend/map.ts",
     },
     output: {
       path: __dirname,

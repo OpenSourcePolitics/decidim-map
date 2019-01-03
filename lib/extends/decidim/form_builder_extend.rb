@@ -6,9 +6,13 @@ Decidim::FormBuilder.class_eval do
       template = ""
       template += label(attribute, (options[:label] || label_for(attribute)) + required_for_attribute(attribute)) unless options[:label] == false
       template += hidden_field(attribute)
-      template += content_tag(:div, nil, class: "code-editor-container", data: {
+      template += content_tag(:div, nil, class: "ce-container", data: {
+        plugin: "editor",
         for: "#{object_name}_#{attribute}",
-        plugin: "editor"
+        locale: I18n.locale,
+        editor: {
+          mode: options[:lang]
+        }
       })
       template += error_for(attribute, options) if error?(attribute)
       template.html_safe

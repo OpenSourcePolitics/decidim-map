@@ -6,14 +6,13 @@ import Editor, { EditorProps } from "./code/editor.component";
 window.DecidimCode = window.DecidimCode || {};
 
 window.DecidimCode.renderEditors = (selector: string) => {
-  console.log('window.Decidim.Code.renderEditors')
-
   window.$(selector).each((index: number, node: HTMLElement) => {
-    console.log(node)
     let id = window.$(node).data('for')
+    window.DecidimCode.locale = window.$(node).data('locale')
     const props: EditorProps = {
       for: id,
-      value: window.$(node).prev('#' + id).val()
+      value: window.$(node).prev('#' + id).val(),
+      ...window.$(node).data("editor")
     };
 
     ReactDOM.render(

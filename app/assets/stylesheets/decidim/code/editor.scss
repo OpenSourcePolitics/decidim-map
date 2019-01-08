@@ -4,17 +4,79 @@
   border: 1px solid $gray-lighter;
   border-radius: 4px;
 
+  .ce-action-bar{
+    max-height: 0;
+    overflow-y: visible;
+    z-index: 1000;
+    padding-right: 16px;
+
+    .button{
+      margin-top: 8px;
+      margin-bottom: 0;
+      z-index: 800;
+
+      &:focus{
+        outline: none;
+      }
+
+      &.hollow{
+        background-color: white;
+      }
+
+      & > .svg-inline--fa{
+        vertical-align: middle;
+        margin-right: .15em;
+      }
+    }
+  }
+
+  .ce-editor,
+  .ce-preview,
+  .CodeMirror{
+    min-height: 50px;
+    align-self: stretch;
+    flex-grow: 1;
+  }
+
+  .ce-preview{
+    min-height: 300px;
+  }
+
   .CodeMirror{
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+    padding-bottom: 2px;
+  }
+
+  .CodeMirror-vscrollbar:focus{
+    outline: none;
   }
 
   .ce-footer{
     background-color: $gray-lighter;
-    margin-top: 2px;
     padding: 2px 4px;
     font-size: 80%;
     color: $gray;
+
+    .button.tiny{
+      margin-bottom: 0;
+      padding: 0 4px;
+      font-size: 1em;
+      border: none;
+
+      &.secondary{
+        color: $gray;
+      }
+
+      &:focus{
+        outline: none;
+      }
+
+      & > .svg-inline--fa{
+        vertical-align: baseline;
+        margin-right: .15em;
+      }
+    }
   }
 }
 

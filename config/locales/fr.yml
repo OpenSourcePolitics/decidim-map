@@ -1,6 +1,10 @@
 ---
 fr:
   decidim:
+    code:
+      editor:
+        actions:
+          preview: Prévisualiser
     components:
       map:
         name: Map

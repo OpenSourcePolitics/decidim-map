@@ -12,6 +12,9 @@ module.exports = env => {
   const ifTest = envUtils.ifTest;
 
   const config = {
+    node: {
+      fs: "empty"
+    },
     entry: {
       code: "./app/frontend/code.ts",
       map: "./app/frontend/map.ts",

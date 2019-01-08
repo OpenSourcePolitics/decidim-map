@@ -2,9 +2,17 @@ import * as React from "react";
 import assetUrl from "../support/asset_url";
 import { library, IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faTimes, faMapMarker, faMapMarkerAlt, faCog, faAlignLeft, faGripLines } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCircle, faTimes, faMapMarker, faMapMarkerAlt,
+  faCog, faAlignLeft, faGripLines, faEye, faMap,
+  faBan, faExclamationTriangle, faCode, faImage
+} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faCircle, faTimes, faMapMarker, faMapMarkerAlt, faCog, faAlignLeft, faGripLines)
+library.add(
+  faCircle, faTimes, faMapMarker, faMapMarkerAlt,
+  faCog, faAlignLeft, faGripLines, faEye, faMap,
+  faBan, faExclamationTriangle, faCode, faImage
+)
 
 interface IconProps {
   name: string;

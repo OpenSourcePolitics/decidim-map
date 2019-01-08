@@ -1,6 +1,10 @@
 ---
 en:
   decidim:
+    code:
+      editor:
+        actions:
+          preview: Preview
     components:
       map:
         name: Map
